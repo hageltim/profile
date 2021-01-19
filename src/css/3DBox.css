@@ -1,0 +1,81 @@
+//@import "compass/css3";
+
+// fork of http://www.cssplay.co.uk/menu/cssplay-3d-cube-animation-for-ie10.html - CSS play - 3D Animated Cube for Internet Explorer IE10, Firefox, Safari and Chrome
+
+// most all of the code below is from the above url except where noted - the main thing is this css3d works in IE10 and most or all modern browsers
+
+// just wanted to make a reference/playground for testing  IE10 / cross browser css 3d code - and start tweaking it to see what tweaks might be possible to the above code - this will probably change over time and be a bit of a mess too
+
+// this code works around IE10 not supporting preserve-3d which is one of the major issues for css3d - see:
+// http://msdn.microsoft.com/en-us/library/ie/hh673529(v=vs.85).aspx#the_ms_transform_style_property
+
+//  prefixfree + normalize enabled
+// looks ok in
+// win7/IE10/chrome/ff 
+// osx m lion safari 6
+// ios ipad 6 3rd (works but edges dont meet as correctly, same effect seen in original cssplay code also)
+//ubuntu chromium/ff (? perspective + slight jagged lines, but ok)
+
+// todo: some links to check next time
+//http://css-3d.org/space-cube-2.htm - doesn't work in ie10 but do edges meet correctly in ipad?
+//  http://blog.joelambert.co.uk/2011/05/10/handling-3d-geometry-with-3d-css3-transforms/
+// http://hakim.se/experiments/css/holobox/
+//http://codepen.io/thebabydino/pen/tbwsc
+
+body {background-color: #333; }
+
+.box3d {width:200px; height:200px; margin:100px auto; position:relative;
+ -webkit-transform-style:preserve-3d;
+}
+.box3d div {position:absolute; left:0; top:0; width:200px; height:200px;
+// -webkit-backface-visibility: hidden; 
+// -webkit-transform-origin:50% 50% -100px;
+opacity: 0.5;
+// backface-visibility: hidden; 
+transform-origin:50% 50% -100px;
+}
+// swapped original colors for these http://codepen.io/sacha/pen/wsaEI
+.boxside1 {background: #4cadeb; 
+	transform: perspective(600px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+animation:spin1 20s infinite linear;
+}
+.boxside2 {background:red; 
+animation:spin2 20s infinite linear;
+}
+.boxside3 {background:blue; 
+animation:spin3 20s infinite linear;
+}
+.boxside4 {background:green; 
+animation:spin4 20s infinite linear;
+}
+.boxside5 {background:orange; 
+animation:spin5 20s infinite linear;
+}
+.boxside6 {background:yellow; 
+animation:spin6 20s infinite linear;
+}
+
+@keyframes spin1 {
+to {transform: perspective(600px) rotateX(360deg) rotateY(450deg) rotateZ(0deg);}
+}
+@keyframes spin2 {
+0% {transform:perspective(600px) rotateX(0deg) rotateY(270deg) rotateZ(0deg);}
+100% {transform:perspective(600px) rotateX(360deg) rotateY(630deg) rotateZ(0deg);}
+}
+@keyframes spin3 {
+0% {transform:perspective(600px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);}
+100% {transform:perspective(600px) rotateX(450deg) rotateY(0deg) rotateZ(-360deg);}
+}
+@keyframes spin4 {
+0% {transform:perspective(600px)  rotateX(-90deg) rotateY(0deg) rotateZ(0deg);}
+100% {transform:perspective(600px) rotateX(270deg) rotateY(0deg) rotateZ(360deg);}
+}
+@keyframes spin5 {
+0% {transform:perspective(600px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+100% {transform:perspective(600px) rotateX(360deg) rotateY(360deg) rotateZ(0deg);}
+}
+@keyframes spin6 {
+0% {transform:perspective(600px)  rotateX(0deg) rotateY(180deg) rotateZ(0deg);}
+100% {transform:perspective(600px) rotateX(360deg)  rotateY(540deg) rotateZ(0deg);}
+}
+
